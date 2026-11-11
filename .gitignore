@@ -1,6 +1,9 @@
-node_modules
-
 .DS_Store
+.pnpm-store/
+*.tsbuildinfo
+node_modules/
+dist/
+target/
 
 *.local
 *.local.*
@@ -9,6 +12,3 @@ node_modules
 .env.*
 !.env.example
 
-.vscode/settings.json
-
-npm_dist/

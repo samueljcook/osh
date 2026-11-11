@@ -1,0 +1,49 @@
+[package]
+name = "paranoid-testing"
+version = "0.0.1-pre.9"
+edition = "2024"
+rust-version = "1.94"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/samueljcook/osh"
+description = "PostgreSQL and PgBouncer containers for testing applications that use paranoid."
+publish = false
+include = ["/src/**/*.rs", "/Cargo.toml", "/LICENSE"]
+
+[dependencies]
+bollard = "0.21.1"
+docker_credential = "1.4.0"
+futures-util = { version = "0.3.34", default-features = false, features = [
+	"std",
+] }
+primitives-rs = { path = "../primitives-rs", version = "0.0.1-pre.10", default-features = false, features = [
+	"byte-encoding",
+	"child-process",
+	"random",
+] }
+tokio-util = { version = "0.7", default-features = false }
+paranoid = { path = "../paranoid", version = "0.0.1-pre.9" }
+secrecy = "0.10.3"
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.145"
+tar = "0.4.46"
+thiserror = "2.0.18"
+tokio = { version = "1.52.3", default-features = false, features = [
+	"rt",
+	"io-util",
+	"fs",
+	"macros",
+	"time",
+] }
+
+[dev-dependencies]
+tokio = { version = "1.52.3", default-features = false, features = [
+	"macros",
+	"rt-multi-thread",
+	"sync",
+	"time",
+] }
+
+[package.metadata.release]
+family = "paranoid"
+status = "implemented"
+readme = true

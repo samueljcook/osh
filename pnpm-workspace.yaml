@@ -1,0 +1,13 @@
+packages:
+    - "packages/*"
+
+# Native install scripts are skipped. These dependencies provide prebuilt
+# binaries or pure-JavaScript implementations.
+allowBuilds:
+    cpu-features: false
+    msgpackr-extract: false
+    protobufjs: false
+    ssh2: false
+
+minimumReleaseAgeExclude:
+    - preact@11.1.0

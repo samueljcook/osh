@@ -1,0 +1,97 @@
+[package]
+name = "paranoid"
+version = "0.0.1-pre.9"
+edition = "2024"
+rust-version = "1.94"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/samueljcook/osh"
+description = "Postgres-backed distributed systems primitives."
+publish = false
+include = ["/src/**/*.rs", "/Cargo.toml", "/LICENSE"]
+
+[dependencies]
+futures-core = "0.3.34"
+futures-util = { version = "0.3.34", default-features = false, features = [
+	"std",
+] }
+paranoid-macros = { path = "../paranoid-macros", version = "0.0.1-pre.9" }
+percent-encoding = "2.3.2"
+# Decodes an application's event type from the Postcard bytes of a topic event that pre.10
+# stored. Every other earlier format has a fixed shape and a reader in this crate.
+postcard = { version = "1.1.3", default-features = false, features = ["alloc"] }
+primitives-rs = { path = "../primitives-rs", version = "0.0.1-pre.10", default-features = false, features = [
+	"byte-encoding",
+	"byte-prefix-range",
+	"crypto",
+	"id",
+	"json",
+	"random",
+	"rate-limit",
+	"record-identity",
+	"secret-bytes",
+	"versioned-state",
+] }
+secrecy = "0.10.3"
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = { version = "1.0.145", features = [
+	"float_roundtrip",
+	"raw_value",
+] }
+sqlx = { version = "0.9.0", default-features = false, features = [
+	"json",
+	"postgres",
+	"runtime-tokio",
+	"tls-rustls",
+	"time",
+] }
+# `sqlx::Executor` has a `describe` method only when the `offline` feature of `sqlx-core` and
+# `sqlx-postgres` is on, and the `macros` feature of `sqlx` turns it on. Paranoid implements
+# `Executor` for its handles, so it enables the feature itself and implements `describe`
+# unconditionally.
+# Paranoid owns its transactions' connections and drives them through `sqlx-core`'s
+# `TransactionManager`, which `sqlx` does not re-export.
+sqlx-core = { version = "0.9.0", default-features = false }
+sqlx-postgres = { version = "0.9.0", default-features = false, features = [
+	"offline",
+] }
+subtle = "2.6.1"
+thiserror = "2.0.18"
+time = { version = "0.3.47", default-features = false, features = [
+	"formatting",
+] }
+tokio = { version = "1.52.3", default-features = false, features = [
+	"macros",
+	"rt",
+	"sync",
+	"time",
+] }
+url = "2.5.8"
+uuid = { version = "1.19.0", default-features = false, optional = true }
+zeroize = "1.8.2"
+
+[features]
+default = []
+# Exposes unsupported implementation details outside the public API contract.
+__internal = []
+# Adds a pooler-safe literal encoding for `uuid::Uuid` bind values.
+uuid = ["dep:uuid", "sqlx/uuid"]
+
+[dev-dependencies]
+proptest = "1.6.0"
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.145"
+sqlx = { version = "0.9.0", default-features = false, features = [
+	"json",
+	"postgres",
+	"runtime-tokio",
+	"tls-rustls",
+] }
+tokio = { version = "1.52.3", default-features = false, features = [
+	"macros",
+	"rt-multi-thread",
+] }
+
+[package.metadata.release]
+family = "paranoid"
+status = "implemented"
+readme = true

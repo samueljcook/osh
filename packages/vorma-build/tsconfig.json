@@ -1,0 +1,12 @@
+{
+	"extends": "@sjcx/repo-tooling/tsconfig.package.json",
+	"compilerOptions": {
+		"lib": ["ESNext"],
+		"outDir": "dist",
+		"rootDir": "src",
+		"target": "ESNext",
+		"tsBuildInfoFile": "dist/tsconfig.tsbuildinfo",
+		"types": ["node"]
+	},
+	"include": ["src"]
+}

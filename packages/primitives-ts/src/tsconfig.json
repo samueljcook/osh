@@ -1,0 +1,20 @@
+{
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		"lib": ["ES2022", "ES2024.Promise", "WebWorker"],
+		"rootDir": ".",
+		"outDir": "../dist",
+		"tsBuildInfoFile": "../dist/tsconfig.tsbuildinfo"
+	},
+	"include": ["."],
+	"exclude": [
+		"browser",
+		"fs/atomic-writes/node",
+		"fs/path-containment/node",
+		"http/cookies/browser",
+		"http/csrf/browser",
+		"processes/child-processes/node",
+		"processes/local-locks/node"
+	],
+	"references": []
+}

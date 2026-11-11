@@ -1,0 +1,12 @@
+{
+	"extends": "../../../../tsconfig.json",
+	"compilerOptions": {
+		"lib": ["ES2022", "ES2024.Promise"],
+		"outDir": "../../../../dist/processes/child-processes/node",
+		"rootDir": ".",
+		"tsBuildInfoFile": "../../../../dist/processes/child-processes/node/tsconfig.tsbuildinfo",
+		"types": ["node"]
+	},
+	"include": ["."],
+	"references": [{ "path": "../../.." }]
+}

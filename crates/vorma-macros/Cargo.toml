@@ -1,0 +1,32 @@
+[package]
+name = "vorma-macros"
+description = "Procedural macros for Vorma."
+
+include = ["/Cargo.toml", "/LICENSE", "/src/**/*.rs"]
+keywords = ["vorma", "macros", "derive", "codegen"]
+categories = ["development-tools::procedural-macro-helpers"]
+edition = "2024"
+license = "MIT OR Apache-2.0"
+homepage = "https://vorma.dev"
+publish = false
+repository = "https://github.com/samueljcook/osh"
+version = "0.86.0-pre.8"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro2 = "1"
+quote = "1"
+primitives-rs-macros-core = { path = "../primitives-rs-macros-core", version = "0.0.1-pre.10" }
+primitives-rs = { path = "../primitives-rs", version = "0.0.1-pre.10", features = [
+	"path-matcher",
+] }
+syn = { version = "2", features = ["full"] }
+
+vorma-path-wire = { path = "../vorma-path-wire", version = "0.86.0-pre.8" }
+
+[package.metadata.release]
+family = "vorma"
+status = "implemented"
+readme = false

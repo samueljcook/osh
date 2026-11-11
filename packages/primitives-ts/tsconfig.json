@@ -1,0 +1,30 @@
+{
+	"extends": "@sjcx/repo-tooling/tsconfig.package.json",
+	"files": [],
+	"references": [
+		{
+			"path": "src"
+		},
+		{
+			"path": "src/browser"
+		},
+		{
+			"path": "src/http/cookies/browser"
+		},
+		{
+			"path": "src/http/csrf/browser"
+		},
+		{
+			"path": "src/fs/atomic-writes/node"
+		},
+		{
+			"path": "src/fs/path-containment/node"
+		},
+		{
+			"path": "src/processes/child-processes/node"
+		},
+		{
+			"path": "src/processes/local-locks/node"
+		}
+	]
+}

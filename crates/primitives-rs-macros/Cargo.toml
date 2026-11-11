@@ -1,0 +1,23 @@
+[package]
+name = "primitives-rs-macros"
+version = "0.0.1-pre.10"
+edition = "2024"
+rust-version = "1.94"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/samueljcook/osh"
+description = "Procedural macros for primitives-rs"
+publish = false
+include = ["/Cargo.toml", "/LICENSE", "/src/**/*.rs"]
+
+[lib]
+proc-macro = true
+
+[dependencies]
+primitives-rs-macros-core = { path = "../primitives-rs-macros-core", version = "0.0.1-pre.10" }
+quote = "1"
+syn = { version = "2", features = ["full"] }
+
+[package.metadata.release]
+family = "primitives"
+status = "implemented"
+readme = false

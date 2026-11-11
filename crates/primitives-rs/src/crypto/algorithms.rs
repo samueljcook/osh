@@ -1,0 +1,23 @@
+//! Individual cryptographic algorithms with explicit scheme names.
+pub mod aes256_gcm_siv;
+#[cfg(feature = "password-derivation")]
+pub mod argon2id;
+pub mod blake3;
+#[cfg(feature = "ed25519")]
+pub mod ed25519;
+pub mod hkdf_sha256;
+pub mod hkdf_sha512;
+pub mod hmac_sha256;
+pub mod hmac_sha256_128;
+pub mod hmac_sha512;
+pub mod kmac256;
+#[cfg(feature = "signatures")]
+pub mod ml_dsa_65;
+#[cfg(feature = "signatures")]
+pub mod ml_dsa_87;
+pub mod sha256;
+pub mod sha3_512;
+pub mod sha512;
+#[cfg(feature = "signatures")]
+pub mod slh_dsa_sha2_256f;
+pub mod xchacha20_poly1305;

@@ -1,0 +1,5 @@
+packages:
+    - react
+    - preact
+    - solid
+autoInstallPeers: false

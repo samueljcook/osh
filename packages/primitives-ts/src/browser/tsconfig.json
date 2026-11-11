@@ -1,0 +1,15 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"lib": ["ES2022", "ES2024.Promise", "DOM"],
+		"rootDir": ".",
+		"outDir": "../../dist/browser",
+		"tsBuildInfoFile": "../../dist/browser/tsconfig.tsbuildinfo"
+	},
+	"include": ["."],
+	"references": [
+		{
+			"path": ".."
+		}
+	]
+}

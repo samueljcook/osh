@@ -1,0 +1,91 @@
+{
+	"name": "@vorma/client",
+	"version": "0.86.0-pre.8",
+	"private": true,
+	"release": {
+		"family": "vorma",
+		"status": "implemented",
+		"readme": true
+	},
+	"type": "module",
+	"license": "(MIT OR Apache-2.0)",
+	"author": "Samuel J. Cook",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/samueljcook/osh",
+		"directory": "packages/vorma-client"
+	},
+	"files": [
+		"dist/",
+		"src/",
+		"!**/*.tsbuildinfo",
+		"!src/**/tsconfig.json"
+	],
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		},
+		"./react": {
+			"types": "./dist/react/index.d.ts",
+			"import": "./dist/react/index.js"
+		},
+		"./preact": {
+			"types": "./dist/preact/index.d.ts",
+			"import": "./dist/preact/index.js"
+		},
+		"./solid": {
+			"types": "./dist/solid/index.d.ts",
+			"import": "./dist/solid/index.js"
+		},
+		"./unstable": {
+			"types": "./dist/unstable/index.d.ts",
+			"import": "./dist/unstable/index.js"
+		}
+	},
+	"dependencies": {
+		"primitives-ts": "workspace:*"
+	},
+	"peerDependencies": {
+		"@solidjs/web": ">=2.0.0-rc.18",
+		"@types/react": ">=18.0.0",
+		"preact": ">=11.0.0",
+		"react": ">=18.0.0",
+		"react-dom": ">=18.0.0",
+		"solid-js": ">=2.0.0-rc.18"
+	},
+	"peerDependenciesMeta": {
+		"@solidjs/web": {
+			"optional": true
+		},
+		"@types/react": {
+			"optional": true
+		},
+		"preact": {
+			"optional": true
+		},
+		"react": {
+			"optional": true
+		},
+		"react-dom": {
+			"optional": true
+		},
+		"solid-js": {
+			"optional": true
+		}
+	},
+	"devDependencies": {
+		"@sjcx/repo-tooling": "workspace:*",
+		"@solidjs/compiler": "2.0.0-rc.18",
+		"@solidjs/web": "2.0.0-rc.18",
+		"@types/react": "^19.2.18",
+		"@types/react-dom": "^19.2.5",
+		"preact": "11.1.0",
+		"react": "19.2.8",
+		"react-dom": "19.2.8",
+		"solid-js": "2.0.0-rc.18",
+		"tsdown": "^0.22.14",
+		"typescript": "^7.0.2"
+	},
+	"sideEffects": false
+}

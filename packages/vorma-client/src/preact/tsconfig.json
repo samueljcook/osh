@@ -1,0 +1,16 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"jsx": "react-jsx",
+		"jsxImportSource": "preact",
+		"lib": ["ES2022", "DOM", "DOM.Iterable"],
+		"outDir": "../../dist/preact",
+		"rootDir": "."
+	},
+	"include": ["."],
+	"references": [
+		{
+			"path": ".."
+		}
+	]
+}

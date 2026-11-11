@@ -1,0 +1,16 @@
+[package]
+name = "vorma-path-wire"
+description = "Vorma's canonical segment-preserving URL-path wire codec."
+edition = "2024"
+license = "MIT OR Apache-2.0"
+homepage = "https://vorma.dev"
+repository = "https://github.com/samueljcook/osh"
+version = "0.86.0-pre.8"
+publish = false
+
+include = ["/Cargo.toml", "/LICENSE", "/src/**/*.rs"]
+
+[package.metadata.release]
+family = "vorma"
+status = "implemented"
+readme = false

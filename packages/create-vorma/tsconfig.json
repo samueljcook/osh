@@ -1,0 +1,10 @@
+{
+	"extends": "@sjcx/repo-tooling/tsconfig.package.json",
+	"compilerOptions": {
+		"outDir": "dist",
+		"rootDir": "src",
+		"tsBuildInfoFile": "dist/tsconfig.tsbuildinfo",
+		"types": ["node"]
+	},
+	"include": ["src"]
+}

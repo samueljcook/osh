@@ -1,0 +1,11 @@
+{
+	"name": "vorma-renderer-examples",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "pnpm --recursive --workspace-concurrency=1 run build",
+		"dev:react": "pnpm --filter vorma-react-example dev",
+		"dev:preact": "pnpm --filter vorma-preact-example dev",
+		"dev:solid": "pnpm --filter vorma-solid-example dev"
+	}
+}

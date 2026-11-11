@@ -1,0 +1,73 @@
+{
+	"name": "vorma",
+	"version": "0.86.0-pre.8",
+	"private": true,
+	"release": {
+		"family": "vorma",
+		"status": "implemented",
+		"readme": true
+	},
+	"type": "module",
+	"engines": {
+		"node": "^22.14.0 || >=23.2.0"
+	},
+	"license": "(MIT OR Apache-2.0)",
+	"author": "Samuel J. Cook",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/samueljcook/osh",
+		"directory": "packages/vorma-build"
+	},
+	"files": [
+		"dist/",
+		"src/",
+		"!**/*.tsbuildinfo",
+		"!src/**/tsconfig.json"
+	],
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		},
+		"./vite": {
+			"types": "./dist/vite/index.d.ts",
+			"import": "./dist/vite/index.js"
+		}
+	},
+	"bin": {
+		"vorma": "./dist/build/cli.js"
+	},
+	"dependencies": {
+		"@babel/parser": "^7.29.11",
+		"@babel/traverse": "^7.29.10",
+		"@effect/platform-node-shared": "^4.0.0",
+		"@noble/hashes": "^2.4.0",
+		"chokidar": "^5.0.0",
+		"effect": "^4.0.0",
+		"lightningcss": "^1.33.0",
+		"primitives-ts": "workspace:*",
+		"rolldown": "^1.2.6",
+		"typescript": "7.0.2"
+	},
+	"peerDependencies": {
+		"@vorma/client": "*",
+		"vite": ">=8.3.0"
+	},
+	"peerDependenciesMeta": {
+		"@vorma/client": {
+			"optional": true
+		},
+		"vite": {
+			"optional": true
+		}
+	},
+	"devDependencies": {
+		"@sjcx/repo-tooling": "workspace:*",
+		"@types/babel__traverse": "^7.28.0",
+		"@types/node": "^26.4.0",
+		"@vorma/client": "workspace:*",
+		"tsdown": "^0.22.14",
+		"vite": "^8.3.5"
+	},
+	"sideEffects": false
+}

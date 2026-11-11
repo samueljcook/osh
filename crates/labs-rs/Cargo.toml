@@ -1,0 +1,44 @@
+[package]
+name = "labs-rs"
+version = "0.0.1-pre.1"
+edition = "2024"
+rust-version = "1.94"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/samueljcook/osh"
+description = "Application libraries built on Primitives"
+publish = false
+include = ["/Cargo.toml", "/LICENSE", "/src/**/*.rs"]
+
+[features]
+local-env-vault = ["dep:primitives-rs", "dep:serde", "dep:zeroize"]
+local-env-vault-cli = [
+	"local-env-vault",
+	"primitives-rs/child-process",
+	"primitives-rs/shutdown-signals",
+	"dep:inquire",
+	"dep:tokio",
+	"dep:tokio-util",
+]
+
+[target.'cfg(unix)'.dependencies]
+primitives-rs = { path = "../primitives-rs", version = "0.0.1-pre.10", features = [
+	"password-derivation",
+	"fs-secret",
+	"json",
+	"process-lock",
+], optional = true }
+serde = { version = "1.0.228", features = ["derive"], optional = true }
+inquire = { version = "0.9.4", default-features = false, features = [
+	"crossterm",
+], optional = true }
+zeroize = { version = "1.8.2", optional = true }
+tokio = { version = "1", default-features = false, features = [
+	"rt",
+	"macros",
+], optional = true }
+tokio-util = { version = "0.7", optional = true }
+
+[package.metadata.release]
+family = "labs"
+status = "implemented"
+readme = true

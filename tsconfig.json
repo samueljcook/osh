@@ -1,0 +1,11 @@
+{
+	"extends": "@sjcx/repo-tooling/tsconfig.base.json",
+	"compilerOptions": {
+		"lib": ["ESNext"],
+		"module": "Preserve",
+		"moduleResolution": "Bundler",
+		"target": "ESNext",
+		"types": ["node"]
+	},
+	"files": ["oxfmt.config.ts", "oxlint.config.ts"]
+}

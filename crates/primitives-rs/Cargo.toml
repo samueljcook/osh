@@ -1,0 +1,355 @@
+[package]
+name = "primitives-rs"
+version = "0.0.1-pre.10"
+edition = "2024"
+rust-version = "1.94"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/samueljcook/osh"
+description = "Miscellaneous software primitives"
+publish = false
+include = ["/Cargo.toml", "/LICENSE", "/src/**/*.rs"]
+
+[features]
+# No stability promise attaches to this feature.
+__internal = []
+serde = ["dep:serde"]
+email = ["dep:lettre", "dep:idna", "dep:blake3"]
+unicode = [
+	"dep:icu_casemap",
+	"dep:icu_casemap_data",
+	"dep:icu_normalizer",
+	"dep:icu_normalizer_data",
+	"dep:icu_properties",
+	"dep:icu_properties_data",
+	"dep:writeable",
+	"dep:thiserror",
+]
+rate-limit = []
+byte-prefix-range = []
+fastcdc = ["dep:fastcdc", "dep:zeroize"]
+record-identity = ["dep:thiserror"]
+record-key-range = ["record-identity", "byte-prefix-range"]
+sqlite-transactions = ["dep:rusqlite", "dep:thiserror"]
+sqlite-backup = [
+	"sqlite-transactions",
+	"fs",
+	"rusqlite/backup",
+	"rusqlite/limits",
+	"dep:tempfile",
+]
+sqlite-records = ["sqlite-transactions", "record-key-range", "random"]
+io = []
+io-async = ["io", "dep:tokio", "tokio/io-util"]
+fs = [
+	"io",
+	"random",
+	"dep:cap-std",
+	"dep:cap-fs-ext",
+	"dep:rustix",
+	"rustix/fs",
+]
+fs-json = ["fs", "json"]
+fs-secret = ["fs", "secret-bytes", "rustix/process"]
+app-dirs = ["dep:dirs", "dep:thiserror"]
+credential-store = [
+	"secret-bytes",
+	"byte-encoding",
+	"dep:keyring-core",
+	"dep:thiserror",
+]
+credential-store-secret-service = [
+	"credential-store",
+	"dep:zbus-secret-service-keyring-store",
+]
+credential-store-macos-keychain = [
+	"credential-store",
+	"dep:apple-native-keyring-store",
+	"dep:security-framework",
+]
+process-lock = ["fs"]
+child-process = [
+	"io-async",
+	"dep:rustix",
+	"rustix/process",
+	"dep:process-wrap",
+	"dep:tokio-util",
+	"tokio/rt",
+	"tokio/sync",
+	"tokio/time",
+	"tokio/macros",
+	"tokio/process",
+	"tokio/signal",
+]
+child-process-http = [
+	"child-process",
+	"dep:hyper",
+	"dep:hyper-util",
+	"dep:http",
+	"dep:http-body-util",
+	"dep:bytes",
+	"tokio/net",
+]
+shutdown-signals = [
+	"dep:tokio",
+	"tokio/signal",
+	"tokio/macros",
+	"dep:tokio-util",
+	"dep:futures-util",
+]
+json = ["serde", "dep:serde_json", "serde_json/unbounded_depth"]
+versioned-state = [
+	"serde",
+	"dep:serde_json",
+	"serde_json/raw_value",
+	"dep:thiserror",
+]
+json-secret = ["json", "secret-bytes"]
+crypto-json = ["crypto", "json-secret"]
+form-data = ["serde", "dep:form_urlencoded", "dep:http", "media-types"]
+form-data-multipart = [
+	"form-data",
+	"dep:multer",
+	"dep:mime",
+	"dep:bytes",
+	"dep:futures-util",
+	"dep:tempfile",
+	"dep:encoding_rs",
+	"dep:tokio",
+	"tokio/fs",
+	"tokio/io-util",
+	"tokio/rt",
+]
+cookie-headers = ["dep:cookie", "dep:http"]
+cookies = ["cookie-headers", "crypto-json"]
+csrf = ["cookies", "dep:url", "dep:tower-layer", "dep:tower-service"]
+password-derivation = ["crypto", "dep:argon2"]
+totp = [
+	"crypto",
+	"dep:totp-rs",
+	"dep:serde",
+	"dep:sha1",
+	"dep:percent-encoding",
+]
+path-matcher = ["dep:rustc-hash", "dep:serde", "dep:smallvec"]
+tasks = [
+	"dep:futures-util",
+	"dep:tokio",
+	"tokio/macros",
+	"tokio/rt",
+	"tokio/sync",
+	"tokio/time",
+	"dep:tokio-util",
+	"dep:tracing",
+]
+sse = [
+	"dep:bytes",
+	"dep:http",
+	"dep:http-body",
+	"dep:futures-util",
+	"dep:tokio",
+	"tokio/macros",
+	"tokio/rt",
+	"tokio/sync",
+	"tokio/time",
+	"dep:tokio-util",
+]
+html = ["dep:serde_json"]
+browser-theme = ["html"]
+csp = ["byte-encoding", "dep:sha2", "dep:html5ever"]
+security-headers = [
+	"dep:http",
+	"dep:tower-layer",
+	"dep:tower-service",
+	"dep:pin-project-lite",
+]
+conditional-responses = [
+	"dep:http",
+	"dep:http-body",
+	"dep:bytes",
+	"dep:blake3",
+	"dep:tower-layer",
+	"dep:tower-service",
+	"dep:tokio",
+	"tokio/time",
+]
+range-requests = ["dep:http"]
+file-bodies = [
+	"dep:bytes",
+	"dep:http-body",
+	"dep:tokio",
+	"tokio/fs",
+	"tokio/io-util",
+]
+media-types = []
+media-types-by-extension = ["media-types", "dep:mime_guess"]
+random = ["dep:getrandom", "dep:zeroize"]
+secret-bytes = ["random", "dep:subtle"]
+id = ["byte-encoding", "random"]
+byte-encoding = ["dep:data-encoding", "dep:bs58", "dep:zeroize"]
+mnemonic = ["byte-encoding", "dep:blake3"]
+crypto = [
+	"byte-encoding",
+	"secret-bytes",
+	"dep:aes",
+	"dep:aes-gcm-siv",
+	"dep:blake3",
+	"dep:chacha20poly1305",
+	"dep:cipher",
+	"dep:hmac",
+	"dep:poly1305",
+	"dep:polyval",
+	"dep:secrecy",
+	"dep:sha2",
+	"dep:sha3",
+	"dep:cshake",
+	"dep:subtle",
+]
+signatures = ["crypto", "dep:rand_core", "dep:slh-dsa", "dep:ml-dsa"]
+ed25519 = ["crypto", "dep:ed25519-dalek"]
+tsgen = [
+	"dep:primitives-rs-macros",
+	"dep:serde",
+	"dep:serde_json",
+	"dep:zeroize",
+]
+
+[dependencies]
+idna = { version = "1.1", optional = true }
+lettre = { version = "0.11.23", default-features = false, features = [
+	"builder",
+], optional = true }
+# Versioned Unicode operations require immutable algorithms and compiled data.
+icu_casemap = { version = "=2.4.0", optional = true }
+icu_casemap_data = { version = "=2.4.0", optional = true }
+icu_normalizer = { version = "=2.4.0", optional = true }
+icu_normalizer_data = { version = "=2.4.0", optional = true }
+icu_properties = { version = "=2.4.0", optional = true }
+icu_properties_data = { version = "=2.4.0", optional = true }
+writeable = { version = "0.6.3", optional = true }
+totp-rs = { version = "6.0.0", default-features = false, features = [
+	"alloc",
+	"zeroize",
+], optional = true }
+keyring-core = { version = "1.0.1", optional = true }
+fastcdc = { version = "=5.0.0", default-features = false, optional = true }
+form_urlencoded = { version = "1", optional = true }
+mime = { version = "0.3", optional = true }
+mime_guess = { version = "2", optional = true }
+multer = { version = "3", default-features = false, optional = true }
+tempfile = { version = "3", optional = true }
+encoding_rs = { version = "0.8", optional = true }
+hyper = { version = "1", features = ["client", "http1"], optional = true }
+hyper-util = { version = "0.1", features = ["tokio"], optional = true }
+http-body-util = { version = "0.1", optional = true }
+http-body = { version = "1", optional = true }
+bytes = { version = "1", optional = true }
+url = { version = "2", optional = true }
+tower-layer = { version = "0.3", optional = true }
+tower-service = { version = "0.3", optional = true }
+pin-project-lite = { version = "0.2", optional = true }
+cookie = { version = "0.18", optional = true }
+http = { version = "1", optional = true }
+bs58 = { version = "0.5.1", optional = true }
+argon2 = { version = "0.5.3", default-features = false, features = [
+	"zeroize",
+], optional = true }
+rand_core = { version = "0.10.1", optional = true }
+slh-dsa = { version = "=0.2.0-rc.5", features = ["zeroize"], optional = true }
+ml-dsa = { version = "0.1.1", default-features = false, features = [
+	"alloc",
+	"rand_core",
+	"zeroize",
+], optional = true }
+ed25519-dalek = { version = "3.0.0", default-features = false, features = [
+	"fast",
+	"zeroize",
+], optional = true }
+aes-gcm-siv = { version = "0.12.1", default-features = false, features = [
+	"aes",
+	"alloc",
+	"zeroize",
+], optional = true }
+# These dependencies enable cleanup of the AEAD backends' keys and stream buffers.
+aes = { version = "0.9.3", default-features = false, features = [
+	"zeroize",
+], optional = true }
+cipher = { version = "0.5.2", default-features = false, features = [
+	"zeroize",
+], optional = true }
+poly1305 = { version = "0.9.1", default-features = false, features = [
+	"zeroize",
+], optional = true }
+polyval = { version = "0.7.3", default-features = false, features = [
+	"zeroize",
+], optional = true }
+blake3 = { version = "1.8.5", features = ["zeroize"], optional = true }
+chacha20poly1305 = { version = "0.11.0", default-features = false, features = [
+	"alloc",
+	"zeroize",
+], optional = true }
+data-encoding = { version = "2.11.0", optional = true }
+dirs = { version = "6", optional = true }
+futures-util = { version = "0.3", optional = true }
+getrandom = { version = "0.3.4", optional = true }
+hmac = { version = "0.13.0", features = ["zeroize"], optional = true }
+percent-encoding = { version = "2", optional = true }
+primitives-rs-macros = { path = "../primitives-rs-macros", version = "0.0.1-pre.10", optional = true }
+rustc-hash = { version = "2", optional = true }
+secrecy = { version = "0.10.3", optional = true }
+serde = { version = "1.0.228", features = ["derive"], optional = true }
+serde_json = { version = "1.0.145", optional = true }
+html5ever = { version = "0.40", optional = true }
+sha2 = { version = "0.11.1", features = ["zeroize"], optional = true }
+# This dependency enables cleanup of the SHA-1 state that totp-rs uses for HMAC-SHA1.
+sha1 = { version = "0.11.0", default-features = false, features = [
+	"zeroize",
+], optional = true }
+sha3 = { version = "0.12.0", features = ["zeroize"], optional = true }
+cshake = { version = "0.2.1", features = ["zeroize"], optional = true }
+smallvec = { version = "1", optional = true }
+subtle = { version = "2.6.1", optional = true }
+tokio = { version = "1", default-features = false, optional = true }
+tokio-util = { version = "0.7", optional = true }
+tracing = { version = "0.1", optional = true }
+thiserror = { version = "2.0.18", optional = true }
+rusqlite = { version = "0.39", features = [
+	"bundled",
+	"hooks",
+	"modern_sqlite",
+], optional = true }
+zeroize = { version = "1.8.2", optional = true }
+
+[dev-dependencies]
+tower-http = { version = "0.6.11", default-features = false, features = [
+	"sensitive-headers",
+] }
+
+[target.'cfg(any(unix, windows))'.dependencies]
+cap-std = { version = "4.0.3", optional = true }
+cap-fs-ext = { version = "4.0.3", optional = true }
+
+[target.'cfg(unix)'.dependencies]
+rustix = { version = "1.1.4", optional = true }
+
+[target.'cfg(windows)'.dependencies]
+process-wrap = { version = "10.0.1", default-features = false, features = [
+	"tokio1",
+	"job-object",
+	"kill-on-drop",
+], optional = true }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+zbus-secret-service-keyring-store = { version = "1.0.1", features = [
+	"crypto-rust",
+], optional = true }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+apple-native-keyring-store = { version = "1.0.2", features = [
+	"keychain",
+], optional = true }
+security-framework = { version = "3.7.0", optional = true }
+
+[package.metadata.release]
+family = "primitives"
+status = "implemented"
+readme = true

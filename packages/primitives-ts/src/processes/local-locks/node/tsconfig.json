@@ -1,0 +1,12 @@
+{
+	"extends": "../../../../tsconfig.json",
+	"compilerOptions": {
+		"lib": ["ES2022", "ES2024.Promise"],
+		"outDir": "../../../../dist/processes/local-locks/node",
+		"rootDir": ".",
+		"tsBuildInfoFile": "../../../../dist/processes/local-locks/node/tsconfig.tsbuildinfo",
+		"types": ["node"]
+	},
+	"include": ["."],
+	"references": [{ "path": "../../.." }]
+}

@@ -1,0 +1,18 @@
+{
+	"name": "vorma-preact-example",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "vorma dev vorma.config.ts",
+		"build": "vorma build vorma.config.ts && tsc -p tsconfig.json && tsc -p client/tsconfig.json"
+	},
+	"devDependencies": {
+		"@prefresh/vite": "4.0.1",
+		"@types/node": "^26.4.0",
+		"@vorma/client": "0.86.0-pre.8",
+		"preact": "11.1.0",
+		"typescript": "^7.0.2",
+		"vite": "^8.3.5",
+		"vorma": "0.86.0-pre.8"
+	}
+}

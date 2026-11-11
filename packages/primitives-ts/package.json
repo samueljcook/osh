@@ -1,0 +1,170 @@
+{
+	"name": "primitives-ts",
+	"version": "0.0.1-pre.10",
+	"private": true,
+	"release": {
+		"family": "primitives",
+		"status": "implemented",
+		"readme": true
+	},
+	"type": "module",
+	"license": "(MIT OR Apache-2.0)",
+	"author": "Samuel J. Cook",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/samueljcook/osh",
+		"directory": "packages/primitives-ts"
+	},
+	"files": [
+		"dist/",
+		"src/",
+		"!**/*.tsbuildinfo",
+		"!src/**/tsconfig.json"
+	],
+	"exports": {
+		"./async-work/activity-indicator": {
+			"types": "./dist/async-work/activity-indicator/index.d.ts",
+			"import": "./dist/async-work/activity-indicator/index.js"
+		},
+		"./async-work/cancellation": {
+			"types": "./dist/async-work/cancellation/index.d.ts",
+			"import": "./dist/async-work/cancellation/index.js"
+		},
+		"./async-work/debounce": {
+			"types": "./dist/async-work/debounce/index.d.ts",
+			"import": "./dist/async-work/debounce/index.js"
+		},
+		"./browser/focus": {
+			"types": "./dist/browser/focus/index.d.ts",
+			"import": "./dist/browser/focus/index.js"
+		},
+		"./browser/theme": {
+			"types": "./dist/browser/theme/index.d.ts",
+			"import": "./dist/browser/theme/index.js"
+		},
+		"./browser/visibility": {
+			"types": "./dist/browser/visibility/index.d.ts",
+			"import": "./dist/browser/visibility/index.js"
+		},
+		"./encoding/binary-to-text": {
+			"types": "./dist/encoding/binary-to-text/index.d.ts",
+			"import": "./dist/encoding/binary-to-text/index.js"
+		},
+		"./encoding/mnemonic": {
+			"types": "./dist/encoding/mnemonic/index.d.ts",
+			"import": "./dist/encoding/mnemonic/index.js"
+		},
+		"./encoding/utf8": {
+			"types": "./dist/encoding/utf8/index.d.ts",
+			"import": "./dist/encoding/utf8/index.js"
+		},
+		"./error-msgs": {
+			"types": "./dist/error-msgs/index.d.ts",
+			"import": "./dist/error-msgs/index.js"
+		},
+		"./fs/atomic-writes/node": {
+			"types": "./dist/fs/atomic-writes/node/index.d.ts",
+			"import": "./dist/fs/atomic-writes/node/index.js"
+		},
+		"./fs/path-containment/node": {
+			"types": "./dist/fs/path-containment/node/index.d.ts",
+			"import": "./dist/fs/path-containment/node/index.js"
+		},
+		"./http/cookies/browser": {
+			"types": "./dist/http/cookies/browser/index.d.ts",
+			"import": "./dist/http/cookies/browser/index.js"
+		},
+		"./http/cookies/headers": {
+			"types": "./dist/http/cookies/headers/index.d.ts",
+			"import": "./dist/http/cookies/headers/index.js"
+		},
+		"./http/csrf/browser": {
+			"types": "./dist/http/csrf/browser/index.d.ts",
+			"import": "./dist/http/csrf/browser/index.js"
+		},
+		"./http/fetch": {
+			"types": "./dist/http/fetch/index.d.ts",
+			"import": "./dist/http/fetch/index.js"
+		},
+		"./http/form-data": {
+			"types": "./dist/http/form-data/index.d.ts",
+			"import": "./dist/http/form-data/index.js"
+		},
+		"./http/redirects": {
+			"types": "./dist/http/redirects/index.d.ts",
+			"import": "./dist/http/redirects/index.js"
+		},
+		"./http/sse": {
+			"types": "./dist/http/sse/index.d.ts",
+			"import": "./dist/http/sse/index.js"
+		},
+		"./id/random-text": {
+			"types": "./dist/id/random-text/index.d.ts",
+			"import": "./dist/id/random-text/index.js"
+		},
+		"./id/random-words": {
+			"types": "./dist/id/random-words/index.d.ts",
+			"import": "./dist/id/random-words/index.js"
+		},
+		"./observable-values": {
+			"types": "./dist/observable-values/index.d.ts",
+			"import": "./dist/observable-values/index.js"
+		},
+		"./path-matcher": {
+			"types": "./dist/path-matcher/index.d.ts",
+			"import": "./dist/path-matcher/index.js"
+		},
+		"./processes/child-processes/node": {
+			"types": "./dist/processes/child-processes/node/index.d.ts",
+			"import": "./dist/processes/child-processes/node/index.js"
+		},
+		"./processes/local-locks/node": {
+			"types": "./dist/processes/local-locks/node/index.d.ts",
+			"import": "./dist/processes/local-locks/node/index.js"
+		},
+		"./random/secure-bytes": {
+			"types": "./dist/random/secure-bytes/index.d.ts",
+			"import": "./dist/random/secure-bytes/index.js"
+		},
+		"./resource-scopes": {
+			"types": "./dist/resource-scopes/index.d.ts",
+			"import": "./dist/resource-scopes/index.js"
+		},
+		"./results": {
+			"types": "./dist/results/index.d.ts",
+			"import": "./dist/results/index.js"
+		},
+		"./serialization/json": {
+			"types": "./dist/serialization/json/index.d.ts",
+			"import": "./dist/serialization/json/index.js"
+		},
+		"./shared-resources": {
+			"types": "./dist/shared-resources/index.d.ts",
+			"import": "./dist/shared-resources/index.js"
+		},
+		"./value-comparison": {
+			"types": "./dist/value-comparison/index.d.ts",
+			"import": "./dist/value-comparison/index.js"
+		}
+	},
+	"peerDependencies": {
+		"@noble/hashes": ">=1.8.0",
+		"@types/node": "*"
+	},
+	"peerDependenciesMeta": {
+		"@noble/hashes": {
+			"optional": true
+		},
+		"@types/node": {
+			"optional": true
+		}
+	},
+	"devDependencies": {
+		"@noble/hashes": "^2.4.0",
+		"@sjcx/repo-tooling": "workspace:*",
+		"@types/node": "^26.4.0",
+		"tsdown": "^0.22.14",
+		"typescript": "^7.0.2"
+	},
+	"sideEffects": false
+}

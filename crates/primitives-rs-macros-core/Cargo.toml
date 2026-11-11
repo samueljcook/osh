@@ -1,0 +1,20 @@
+[package]
+name = "primitives-rs-macros-core"
+version = "0.0.1-pre.10"
+edition = "2024"
+rust-version = "1.94"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/samueljcook/osh"
+description = "The expansion of the primitives-rs TypeScript generation derive, for crates that re-export the derive"
+publish = false
+include = ["/Cargo.toml", "/LICENSE", "/src/**/*.rs"]
+
+[dependencies]
+proc-macro2 = "1"
+quote = "1"
+syn = { version = "2", features = ["full", "visit", "visit-mut"] }
+
+[package.metadata.release]
+family = "primitives"
+status = "implemented"
+readme = false

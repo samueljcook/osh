@@ -1,0 +1,55 @@
+[package]
+name = "vorma"
+description = "Rust-first full-stack web framework: typed views and resources, generated TypeScript contracts, and a Vite-integrated frontend."
+
+include = ["/Cargo.toml", "/LICENSE", "/src/**/*.rs"]
+keywords = ["fullstack", "framework", "web", "vite", "ssr"]
+categories = ["web-programming::http-server", "web-programming"]
+edition = "2024"
+license = "MIT OR Apache-2.0"
+homepage = "https://vorma.dev"
+publish = false
+repository = "https://github.com/samueljcook/osh"
+version = "0.86.0-pre.8"
+
+[features]
+# No stability promise attaches to this feature.
+__internal = []
+
+[dependencies]
+blake3 = "1.8.5"
+bytes = { version = "1", features = ["serde"] }
+cookie = "0.18"
+form_urlencoded = "1"
+futures-util = "0.3"
+http = "1"
+http-body = "1"
+http-body-util = "0.1"
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["raw_value"] }
+primitives-rs = { path = "../primitives-rs", version = "0.0.1-pre.10", features = [
+	"cookie-headers",
+	"file-bodies",
+	"form-data-multipart",
+	"fs",
+	"html",
+	"csp",
+	"json",
+	"media-types",
+	"media-types-by-extension",
+	"path-matcher",
+	"range-requests",
+	"tasks",
+	"tsgen",
+] }
+tokio = { version = "1", features = ["fs", "io-util", "macros", "rt", "sync"] }
+tower-layer = "0.3"
+tower-service = "0.3"
+tracing = "0.1"
+vorma-macros = { path = "../vorma-macros", version = "0.86.0-pre.8" }
+vorma-path-wire = { path = "../vorma-path-wire", version = "0.86.0-pre.8" }
+
+[package.metadata.release]
+family = "vorma"
+status = "implemented"
+readme = true

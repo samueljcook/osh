@@ -1,48 +1,67 @@
-# Vorma Framework
+# osh
 
-<img src="internal/site/frontend/assets/vorma-banner.webp" alt="Vorma banner">
+The open source home (osh) for Vorma, Paranoid, Lime, and more.
 
----
+## Vorma
 
-The Next.js of Golang, powered by Vite.
+### Cargo
 
-## Links
+| Package | Version | Documentation |
+| --- | --- | --- |
+| [vorma](https://crates.io/crates/vorma) | 0.86.0-pre.8 | [docs.rs](https://docs.rs/crate/vorma/0.86.0-pre.8) |
 
-[vorma.dev](https://vorma.dev) | [github.com](https://github.com/vormadev/vorma)
-| [pkg.go.dev](https://pkg.go.dev/github.com/vormadev/vorma) |
-[npmjs.com](https://www.npmjs.com/package/vorma) |
-[x.com](https://x.com/vormadev)
+### npm
 
-## Quick Start
+| Package | Version | Documentation |
+| --- | --- | --- |
+| [@vorma/client](https://npmx.dev/package/@vorma/client) | 0.86.0-pre.8 | [npmx.dev](https://npmx.dev/package-docs/@vorma/client/v/0.86.0-pre.8) |
+| [vorma](https://npmx.dev/package/vorma) | 0.86.0-pre.8 | [npmx.dev](https://npmx.dev/package-docs/vorma/v/0.86.0-pre.8) |
 
-```sh
-npm create vorma@latest
-```
+## Paranoid
 
-## What is Vorma?
+### Cargo
 
-Vorma is a lot like Next.js, Remix, or TanStack Start, but it uses Go on the
-backend, with your choice of **_React_**, **_Solid_**, or **_Preact_** on the
-frontend.
+| Package | Version | Documentation |
+| --- | --- | --- |
+| [paranoid](https://crates.io/crates/paranoid) | 0.0.1-pre.9 | [docs.rs](https://docs.rs/crate/paranoid/0.0.1-pre.9) |
+| [paranoid-testing](https://crates.io/crates/paranoid-testing) | 0.0.1-pre.9 | [docs.rs](https://docs.rs/crate/paranoid-testing/0.0.1-pre.9) |
 
-It has **_nested routing_**, effortless **_end-to-end type safety_** (including
-Link components!), **_parallel-executed route loaders_**, and much, much more.
+## Lime
 
-It's deeply integrated with **_Vite_** to give you full **_hot module
-reloading_** at dev-time.
+Coming soon.
 
-## Get Started
+## Primitives
 
-If you want to dive right in, just open a terminal and run
-`npm create vorma@latest` and follow the prompts.
+### Cargo
 
-If you'd prefer to read more first, take a peek at
-[our docs](https://vorma.dev/docs).
+| Package | Version | Documentation |
+| --- | --- | --- |
+| [primitives-rs](https://crates.io/crates/primitives-rs) | 0.0.1-pre.10 | [docs.rs](https://docs.rs/crate/primitives-rs/0.0.1-pre.10) |
 
-## Status
+### npm
 
-Vorma's underlying tech has reached a good degree of stability, but its APIs are
-still evolving. Sub-1.0 releases may contain breaking changes. If you ever need
-help upgrading to the latest version, feel free to
-[file an issue on GitHub](https://github.com/vormadev/vorma) or
-[reach out on X](https://x.com/vormadev).
+| Package | Version | Documentation |
+| --- | --- | --- |
+| [primitives-ts](https://npmx.dev/package/primitives-ts) | 0.0.1-pre.10 | [npmx.dev](https://npmx.dev/package-docs/primitives-ts/v/0.0.1-pre.10) |
+
+## Labs
+
+### Cargo
+
+| Package | Version | Documentation |
+| --- | --- | --- |
+| [labs-rs](https://crates.io/crates/labs-rs) | 0.0.1-pre.1 | [docs.rs](https://docs.rs/crate/labs-rs/0.0.1-pre.1) |
+
+### npm
+
+| Package | Version | Documentation |
+| --- | --- | --- |
+| [labs-ts](https://npmx.dev/package/labs-ts) | 0.0.1-pre.1 | [npmx.dev](https://npmx.dev/package-docs/labs-ts/v/0.0.1-pre.1) |
+
+## Other
+
+### npm
+
+| Package | Version | Documentation |
+| --- | --- | --- |
+| [@sjcx/repo-tooling](https://npmx.dev/package/@sjcx/repo-tooling) | 0.0.1-pre.0 | [npmx.dev](https://npmx.dev/package-docs/@sjcx/repo-tooling/v/0.0.1-pre.0) |

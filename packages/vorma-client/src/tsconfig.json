@@ -1,0 +1,11 @@
+{
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		"lib": ["ES2022", "ES2024.Promise", "DOM", "DOM.Iterable"],
+		"outDir": "../dist",
+		"rootDir": "."
+	},
+	"include": ["."],
+	"exclude": ["react", "preact", "solid"],
+	"references": []
+}

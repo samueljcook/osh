@@ -1,0 +1,18 @@
+{
+	"extends": "@sjcx/repo-tooling/tsconfig.package.json",
+	"files": [],
+	"references": [
+		{
+			"path": "src"
+		},
+		{
+			"path": "src/react"
+		},
+		{
+			"path": "src/preact"
+		},
+		{
+			"path": "src/solid"
+		}
+	]
+}

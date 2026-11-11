@@ -1,0 +1,80 @@
+{
+	"name": "@sjcx/repo-tooling",
+	"version": "0.0.1-pre.0",
+	"private": true,
+	"release": {
+		"standalone": true,
+		"status": "implemented",
+		"readme": true
+	},
+	"type": "module",
+	"license": "(MIT OR Apache-2.0)",
+	"author": "Samuel J. Cook",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/samueljcook/osh",
+		"directory": "packages/repo-tooling"
+	},
+	"files": [
+		"dist/",
+		"src/",
+		"!**/*.tsbuildinfo",
+		"!src/**/tsconfig.json"
+	],
+	"exports": {
+		"./oxfmt": {
+			"types": "./dist/oxfmt/index.d.ts",
+			"import": "./dist/oxfmt/index.js"
+		},
+		"./oxlint": {
+			"types": "./dist/oxlint/index.d.ts",
+			"import": "./dist/oxlint/index.js"
+		},
+		"./oxlint/plugin": {
+			"types": "./dist/oxlint/plugin/index.d.ts",
+			"import": "./dist/oxlint/plugin/index.js"
+		},
+		"./tsconfig.base.json": "./dist/tsconfig.base.json",
+		"./tsconfig.package.json": "./dist/tsconfig.package.json",
+		"./tsdown": {
+			"types": "./dist/tsdown/index.d.ts",
+			"import": "./dist/tsdown/index.js"
+		}
+	},
+	"dependencies": {
+		"@oxlint/plugins": "^1.80.0"
+	},
+	"peerDependencies": {
+		"oxfmt": "*",
+		"oxlint": "*",
+		"oxlint-tsgolint": "*",
+		"tsdown": "*",
+		"typescript": ">=5.8.0"
+	},
+	"peerDependenciesMeta": {
+		"oxfmt": {
+			"optional": true
+		},
+		"oxlint": {
+			"optional": true
+		},
+		"oxlint-tsgolint": {
+			"optional": true
+		},
+		"tsdown": {
+			"optional": true
+		},
+		"typescript": {
+			"optional": true
+		}
+	},
+	"devDependencies": {
+		"@types/node": "^26.4.0",
+		"oxfmt": "^0.67.0",
+		"oxlint": "^1.82.0",
+		"oxlint-tsgolint": "^7.0.2001",
+		"tsdown": "^0.22.14",
+		"typescript": "^7.0.2"
+	},
+	"sideEffects": false
+}

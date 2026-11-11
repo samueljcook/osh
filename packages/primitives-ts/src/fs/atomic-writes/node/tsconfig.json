@@ -1,0 +1,12 @@
+{
+	"extends": "../../../../tsconfig.json",
+	"compilerOptions": {
+		"lib": ["ES2022", "ES2024.Promise"],
+		"outDir": "../../../../dist/fs/atomic-writes/node",
+		"rootDir": ".",
+		"tsBuildInfoFile": "../../../../dist/fs/atomic-writes/node/tsconfig.tsbuildinfo",
+		"types": ["node"]
+	},
+	"include": ["."],
+	"references": [{ "path": "../../.." }]
+}

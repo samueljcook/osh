@@ -1,0 +1,21 @@
+{
+	"name": "vorma-react-example",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "vorma dev vorma.config.ts",
+		"build": "vorma build vorma.config.ts && tsc -p tsconfig.json && tsc -p client/tsconfig.json"
+	},
+	"devDependencies": {
+		"@types/node": "^26.4.0",
+		"@types/react": "^19.2.18",
+		"@types/react-dom": "^19.2.5",
+		"@vitejs/plugin-react": "^6.1.1",
+		"@vorma/client": "0.86.0-pre.8",
+		"react": "19.2.8",
+		"react-dom": "19.2.8",
+		"typescript": "^7.0.2",
+		"vite": "^8.3.5",
+		"vorma": "0.86.0-pre.8"
+	}
+}
