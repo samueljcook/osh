@@ -10,10 +10,9 @@ use crate::db::{
 };
 use crate::queue::{
 	GLOBAL_PAUSE_KEY, JOB_ID_LEN, JobStatus, MAX_DEDUPE_KEY_LEN, MAX_TASK_NAME_LEN,
-	MAX_WORKER_OWNER_ID_LEN, QUEUE_SCHEMA_VALIDATE_ACTIVE_DEDUPE_ARBITER_LABEL,
-	QUEUE_SCHEMA_VALIDATE_NAMED_INDEX_LABEL, QUEUE_SCHEMA_VALIDATE_PRIMARY_KEY_LABEL,
-	QUEUE_SCHEMA_VALIDATE_TABLE_CHECKS_LABEL, QUEUE_SCHEMA_VALIDATE_TABLE_COLUMNS_LABEL,
-	WORKER_CLAIM_TOKEN_LEN,
+	MAX_WORKER_OWNER_ID_LEN, QUEUE_SCHEMA_VALIDATE_NAMED_INDEX_LABEL,
+	QUEUE_SCHEMA_VALIDATE_PRIMARY_KEY_LABEL, QUEUE_SCHEMA_VALIDATE_TABLE_CHECKS_LABEL,
+	QUEUE_SCHEMA_VALIDATE_TABLE_COLUMNS_LABEL, WORKER_CLAIM_TOKEN_LEN,
 };
 
 pub(super) async fn validate_published_v10_schema_in_current_transaction(
@@ -66,8 +65,7 @@ async fn validate_physical_contract(
 	.await?;
 	validate_table_checks(tx, tables, require_claim_token).await?;
 	validate_primary_keys(tx, tables).await?;
-	validate_required_indexes(tx, tables).await?;
-	validate_active_dedupe_conflict_arbiter(tx, tables).await
+	validate_required_indexes(tx, tables).await
 }
 
 async fn validate_table_columns(
@@ -526,6 +524,10 @@ impl QueueIndexValidationField {
 	}
 }
 
+/// Checks each required B-tree index's physical contract through catalog reads.
+/// Each key must use its type's built-in default operator class to support the queue's
+/// comparisons and ordering. Unique indexes must enforce uniqueness immediately so that
+/// PostgreSQL can use them as `ON CONFLICT` arbiters.
 async fn validate_required_index(
 	tx: &mut Tx<'_>,
 	required_index: RequiredQueueIndex<'_>,
@@ -561,6 +563,7 @@ async fn validate_required_index(
           AND table_class.relname OPERATOR(pg_catalog.=) $2
           AND index_class.relname OPERATOR(pg_catalog.=) $3
           AND idx.indisunique OPERATOR(pg_catalog.=) $4
+          AND (NOT idx.indisunique OR idx.indimmediate)
           AND idx.indnkeyatts OPERATOR(pg_catalog.=) $5
           AND idx.indexprs IS NULL
           AND NOT EXISTS (
@@ -569,8 +572,18 @@ async fn validate_required_index(
               JOIN pg_catalog.pg_attribute AS key_attr
                 ON key_attr.attrelid OPERATOR(pg_catalog.=) idx.indrelid
                AND key_attr.attnum OPERATOR(pg_catalog.=) idx.indkey[key_position.position]
+              LEFT JOIN pg_catalog.pg_opclass AS opclass
+                ON opclass.oid OPERATOR(pg_catalog.=) idx.indclass[key_position.position]
+              LEFT JOIN pg_catalog.pg_namespace AS opclass_namespace
+                ON opclass_namespace.oid OPERATOR(pg_catalog.=) opclass.opcnamespace
               WHERE idx.indoption[key_position.position] OPERATOR(pg_catalog.<>) 0
                  OR idx.indcollation[key_position.position] OPERATOR(pg_catalog.<>) key_attr.attcollation
+                 OR opclass.oid IS NULL
+                 OR opclass_namespace.nspname IS NULL
+                 OR opclass_namespace.nspname OPERATOR(pg_catalog.<>) 'pg_catalog'
+                 OR opclass.opcmethod OPERATOR(pg_catalog.<>) index_class.relam
+                 OR opclass.opcintype OPERATOR(pg_catalog.<>) key_attr.atttypid
+                 OR NOT opclass.opcdefault
           )
           {builtin_btree_index_conditions}
         "#,
@@ -636,52 +649,6 @@ async fn validate_required_index(
 		)));
 	}
 
-	Ok(())
-}
-
-async fn validate_active_dedupe_conflict_arbiter(
-	tx: &mut Tx<'_>,
-	tables: &impl QueueSchemaTableBinding,
-) -> Result<(), SchemaError> {
-	let insert_columns = enqueue_with_dedupe_insert_columns_sql();
-	let conflict_columns = active_dedupe_conflict_columns_sql();
-	let conflict_predicate = active_dedupe_conflict_predicate_sql();
-	let statement = format!(
-		r#"
-        EXPLAIN (COSTS OFF)
-        INSERT INTO {} ({}) VALUES (
-            pg_catalog.decode(pg_catalog.repeat('00', {}), 'hex'),
-            '__paranoid_queue_dedupe_contract_validation',
-            '{{}}'::pg_catalog.jsonb,
-            'pending',
-            pg_catalog.statement_timestamp(),
-            0,
-            0,
-            pg_catalog.statement_timestamp(),
-            pg_catalog.statement_timestamp(),
-            '__paranoid_queue_dedupe_contract_validation'
-        )
-        ON CONFLICT ({})
-        WHERE {}
-        DO NOTHING
-        "#,
-		QueueTable::Jobs.table_name(tables).quoted(),
-		insert_columns,
-		JOB_ID_LEN,
-		conflict_columns,
-		conflict_predicate
-	);
-	tx.record_database_operation(
-		DatabaseOperationKind::Execute,
-		QUEUE_SCHEMA_VALIDATE_ACTIVE_DEDUPE_ARBITER_LABEL,
-		Some(statement.as_str()),
-	);
-	owned_portable_query(sqlx::AssertSqlSafe(statement.as_str()))
-		.execute(tx.inner.as_mut())
-		.await
-		.map_err(|error| {
-			error.with_operation_label(QUEUE_SCHEMA_VALIDATE_ACTIVE_DEDUPE_ARBITER_LABEL)
-		})?;
 	Ok(())
 }
 

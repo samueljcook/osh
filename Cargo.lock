@@ -2055,7 +2055,7 @@ dependencies = [
 
 [[package]]
 name = "paranoid"
-version = "0.0.1-pre.9"
+version = "0.0.1-pre.10"
 dependencies = [
  "futures-core",
  "futures-util",
@@ -2081,7 +2081,7 @@ dependencies = [
 
 [[package]]
 name = "paranoid-macros"
-version = "0.0.1-pre.9"
+version = "0.0.1-pre.10"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -2090,7 +2090,7 @@ dependencies = [
 
 [[package]]
 name = "paranoid-testing"
-version = "0.0.1-pre.9"
+version = "0.0.1-pre.10"
 dependencies = [
  "bollard",
  "docker_credential",

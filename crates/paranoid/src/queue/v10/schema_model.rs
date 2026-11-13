@@ -153,14 +153,6 @@ impl QueueColumn {
 				| Self::Key
 		)
 	}
-
-	pub(in crate::queue) fn list(columns: &[Self]) -> String {
-		columns
-			.iter()
-			.map(|column| column.name())
-			.collect::<Vec<_>>()
-			.join(", ")
-	}
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -214,43 +206,6 @@ pub(in crate::queue) enum QueueIndexPredicate {
 }
 
 impl QueueIndexPredicate {
-	pub(in crate::queue) fn sql(self) -> Option<String> {
-		match self {
-			Self::None => None,
-			Self::PendingStatus => Some(format!(
-				"{} OPERATOR(pg_catalog.=) '{}'",
-				QueueColumn::Status.name(),
-				crate::queue::JobStatus::Pending.as_str()
-			)),
-			Self::WorkerOwnerIdPresent => {
-				Some(format!("{} IS NOT NULL", QueueColumn::WorkerOwnerId.name()))
-			}
-			Self::RunningExecutionHeartbeatPresent => Some(format!(
-				"{} OPERATOR(pg_catalog.=) '{}' AND {} IS NOT NULL",
-				QueueColumn::Status.name(),
-				crate::queue::JobStatus::Running.as_str(),
-				QueueColumn::ExecutionHeartbeatAt.name()
-			)),
-			Self::TerminalFinishedAtPresent => Some(format!(
-				"{} OPERATOR(pg_catalog.=) ANY (ARRAY['{}', '{}']::pg_catalog.text[]) AND {} IS NOT NULL",
-				QueueColumn::Status.name(),
-				crate::queue::JobStatus::Completed.as_str(),
-				crate::queue::JobStatus::Failed.as_str(),
-				QueueColumn::FinishedAt.name()
-			)),
-			Self::ActiveDedupe => Some(format!(
-				"{} IS NOT NULL AND {} OPERATOR(pg_catalog.=) ANY (ARRAY['{}', '{}']::pg_catalog.text[])",
-				QueueColumn::DedupeKey.name(),
-				QueueColumn::Status.name(),
-				crate::queue::JobStatus::Pending.as_str(),
-				crate::queue::JobStatus::Running.as_str()
-			)),
-			Self::PauseTaskNamePresent => {
-				Some(format!("{} IS NOT NULL", QueueColumn::TaskName.name()))
-			}
-		}
-	}
-
 	/// The predicate as PostgreSQL prints it when no other object shadows a built-in name.
 	pub(in crate::queue) fn catalog_expression(self) -> Option<&'static str> {
 		match self {

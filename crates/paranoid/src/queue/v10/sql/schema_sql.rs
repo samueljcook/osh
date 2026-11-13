@@ -129,21 +129,3 @@ pub(in crate::queue) fn queue_schema_index_defs() -> [QueueIndexDef; 11] {
 		},
 	]
 }
-
-pub(in crate::queue) fn active_dedupe_index_def() -> QueueIndexDef {
-	queue_schema_index_defs()
-		.into_iter()
-		.find(|def| def.predicate == QueueIndexPredicate::ActiveDedupe)
-		.expect("queue schema must define active-dedupe arbiter index")
-}
-
-pub(in crate::queue) fn active_dedupe_conflict_columns_sql() -> String {
-	QueueColumn::list(active_dedupe_index_def().columns)
-}
-
-pub(in crate::queue) fn active_dedupe_conflict_predicate_sql() -> String {
-	active_dedupe_index_def()
-		.predicate
-		.sql()
-		.expect("active-dedupe index must have predicate")
-}

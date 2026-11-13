@@ -23,8 +23,8 @@ The open source home (osh) for Vorma, Paranoid, Lime, and more.
 
 | Package | Version | Documentation |
 | --- | --- | --- |
-| [paranoid](https://crates.io/crates/paranoid) | 0.0.1-pre.9 | [docs.rs](https://docs.rs/crate/paranoid/0.0.1-pre.9) |
-| [paranoid-testing](https://crates.io/crates/paranoid-testing) | 0.0.1-pre.9 | [docs.rs](https://docs.rs/crate/paranoid-testing/0.0.1-pre.9) |
+| [paranoid](https://crates.io/crates/paranoid) | 0.0.1-pre.10 | [docs.rs](https://docs.rs/crate/paranoid/0.0.1-pre.10) |
+| [paranoid-testing](https://crates.io/crates/paranoid-testing) | 0.0.1-pre.10 | [docs.rs](https://docs.rs/crate/paranoid-testing/0.0.1-pre.10) |
 
 ## Lime
 

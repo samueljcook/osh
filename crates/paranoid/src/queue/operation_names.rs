@@ -6,5 +6,3 @@ pub const QUEUE_SCHEMA_VALIDATE_TABLE_COLUMNS_LABEL: &str = "queue.schema.valida
 pub const QUEUE_SCHEMA_VALIDATE_TABLE_CHECKS_LABEL: &str = "queue.schema.validate_table_checks";
 pub const QUEUE_SCHEMA_VALIDATE_PRIMARY_KEY_LABEL: &str = "queue.schema.validate_primary_key";
 pub const QUEUE_SCHEMA_VALIDATE_NAMED_INDEX_LABEL: &str = "queue.schema.validate_named_index";
-pub const QUEUE_SCHEMA_VALIDATE_ACTIVE_DEDUPE_ARBITER_LABEL: &str =
-	"queue.schema.validate_active_dedupe_arbiter";
